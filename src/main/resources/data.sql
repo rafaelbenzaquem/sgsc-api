@@ -1,5 +1,5 @@
-insert into cliente(nome,email,cpf_ou_cnpj,tipo) values ('Maria Silva','maria@gmail.com','36378912377',1);
-insert into cliente(nome,email,cpf_ou_cnpj,tipo) values ('Rafael Benzaquem Neto','rafael@gmail.com','88754181364',1);
+insert into cliente(nome,email,cpf_ou_cnpj,tipo) values ('Maria Silva','maria@gmail.com','36378912377',0);
+insert into cliente(nome,email,cpf_ou_cnpj,tipo) values ('Rafael Benzaquem Neto','rafael@gmail.com','88754181364',0);
 
 insert into telefone(cliente_id,numero) values (1,'27363323');
 insert into telefone(cliente_id,numero) values (1,'93838393');

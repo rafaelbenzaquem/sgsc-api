@@ -1,6 +1,7 @@
 package com.rafaelbenz.sgsc.sgscapi.services;
 
 import com.rafaelbenz.sgsc.sgscapi.model.Cliente;
+import com.rafaelbenz.sgsc.sgscapi.model.Endereco;
 import com.rafaelbenz.sgsc.sgscapi.repositories.ClienteRepository;
 import com.rafaelbenz.sgsc.sgscapi.repositories.EnderecoRepository;
 import com.rafaelbenz.sgsc.sgscapi.services.exceptions.DataIntegretyServiceException;
@@ -47,9 +48,9 @@ public class ClienteService {
     }
 
     public Cliente update(Cliente cliente) {
-        Cliente clienteAtualizado = find(cliente.getId());
-        updateData(clienteAtualizado, cliente);
-        return clienteRepository.save(clienteAtualizado);
+//        Cliente clienteAtualizado = find(cliente.getId());
+//        updateData(clienteAtualizado, cliente);
+        return clienteRepository.save(cliente);
     }
 
     private void updateData(Cliente clienteAtualizado, Cliente cliente) {
@@ -60,6 +61,10 @@ public class ClienteService {
     public Cliente delete(Integer id) {
         Cliente cliente = find(id);
         try {
+            for(Endereco endereco:cliente.getEnderecos()){
+                enderecoRepository.delete(endereco);
+            }
+
             clienteRepository.delete(cliente);
         } catch (DataIntegrityViolationException ex) {
             throw new DataIntegretyServiceException("Não é possível remover um Cliente que possui vinculos.");

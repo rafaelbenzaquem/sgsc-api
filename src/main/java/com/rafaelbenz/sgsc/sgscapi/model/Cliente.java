@@ -24,7 +24,7 @@ public class Cliente implements Serializable {
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
-    @CollectionTable(name = "TELEFONE")
+    @CollectionTable(name = "TELEFONE", joinColumns = @JoinColumn(name = "cliente_id"))
     @Column(name = "numero")
     private Set<String> telefones = new HashSet<>();
 
@@ -75,9 +75,7 @@ public class Cliente implements Serializable {
         return tipo;
     }
 
-    public void setTipo(TipoCliente tipo) {
-        this.tipo = tipo.getCodigo();
-    }
+    public void setTipo(TipoCliente tipo) { this.tipo = (tipo == null) ? null : tipo.getCodigo();}
 
     public List<Endereco> getEnderecos() {
         return enderecos;

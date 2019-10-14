@@ -1,8 +1,8 @@
 package com.rafaelbenz.sgsc.sgscapi.model.enums;
 
 public enum TipoCliente {
-    PESSOA_FISICA(1,"Pessoa física"),
-    PESSOA_JURIDICA(2,"Pessoa jurídica");
+    PESSOA_FISICA(0,"Pessoa física"),
+    PESSOA_JURIDICA(1,"Pessoa jurídica");
 
     private int codigo;
     private String descricao;

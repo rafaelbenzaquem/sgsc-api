@@ -23,11 +23,11 @@ public class ClienteResource {
     ClienteService service;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody Cliente cliente) {
         boolean teste = false;
         if (teste)
             throw new RuntimeException();
-        Cliente Cliente = service.insert(objDTO.toCliente());
+        Cliente Cliente = service.insert(cliente);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand(Cliente.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -59,9 +59,10 @@ public class ClienteResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
-        objDto.setId(id);
-        service.update(objDto.toCliente());
+    public ResponseEntity<Void> update(@Valid @RequestBody Cliente cliente, @PathVariable Integer id) {
+        System.out.println("está vindo pra ca --------------");
+        cliente.setId(id);
+        service.update(cliente);
         return ResponseEntity.noContent().build();
     }
 

@@ -71,8 +71,8 @@ public class Cliente implements Serializable {
         this.cpfOuCnpj = cpfOuCnpj;
     }
 
-    public TipoCliente getTipo() {
-        return TipoCliente.toEnum(tipo);
+    public Integer getTipo() {
+        return tipo;
     }
 
     public void setTipo(TipoCliente tipo) {

@@ -43,12 +43,12 @@ public class ClienteEndPointTest extends SgscApiApplicationTests {
                 post("/clientes").
                 then().
                 statusCode(201)
-                .header("Location", "http://localhost:" + port + "/clientes/2");
+                .header("Location", "http://localhost:" + port + "/clientes/3");
     }
 
     @Test
     public void buscarUmClienteComIdInvalido() {
-        int id = 3;
+        int id = 4;
         given()
                 //.param("id", "1") requisição sem parâmetros
                 .when()
@@ -73,15 +73,15 @@ public class ClienteEndPointTest extends SgscApiApplicationTests {
                 .statusCode(200) // O status http retornado foi 200
                 .contentType(ContentType.JSON) // O response foi retornado no formato JSON
                 .body("id", equalTo(1))
-                .body("nome", containsString("maria silva")); //A chave "nome" contém o valor "maria silva"
+                .body("nome", containsString("Maria Silva")); //A chave "nome" contém o valor "maria silva"
     }
 
     @Test
     public void listarTodosOsClientes() {
-        criarCliente();
         List<ClienteDTO> clientes = new ArrayList<>();
-        clientes.add(new ClienteDTO(1, "maria silva", "maria@gmail.com"));
-        clientes.add(new ClienteDTO(2, "João da Silva", "joao@gmail.com"));
+        clientes.add(new ClienteDTO(1, "Maria Silva", "maria@gmail.com"));
+        clientes.add(new ClienteDTO(2, "Rafael Benzaquem Neto", "rafael@gmail.com"));
+        clientes.add(new ClienteDTO(3, "João da Silva", "joao@gmail.com"));
 
 
         List<LinkedHashMap> expected = given().get("/clientes").as(List.class);

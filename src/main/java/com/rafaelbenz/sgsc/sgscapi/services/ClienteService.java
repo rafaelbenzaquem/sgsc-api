@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class ClienteService {
     @Transactional
     public Cliente insert(Cliente cliente) {
         cliente.setId(null);
-        cliente =  clienteRepository.save(cliente);
+        cliente = clienteRepository.save(cliente);
         enderecoRepository.saveAll(cliente.getEnderecos());
         return cliente;
     }
@@ -48,9 +49,17 @@ public class ClienteService {
     }
 
     public Cliente update(Cliente cliente) {
-//        Cliente clienteAtualizado = find(cliente.getId());
-//        updateData(clienteAtualizado, cliente);
-        return clienteRepository.save(cliente);
+        List<Endereco> enderecosNovos =new ArrayList<>();
+        for (Endereco endereco : cliente.getEnderecos()) {
+            endereco.setId(null);
+            endereco.setCliente(cliente);
+            enderecosNovos.add(endereco);
+        }
+         enderecoRepository.deleteAll(find(cliente.getId()).getEnderecos());
+         cliente = clienteRepository.save(cliente);
+
+        enderecoRepository.saveAll(enderecosNovos);
+        return cliente;
     }
 
     private void updateData(Cliente clienteAtualizado, Cliente cliente) {
@@ -61,7 +70,7 @@ public class ClienteService {
     public Cliente delete(Integer id) {
         Cliente cliente = find(id);
         try {
-            for(Endereco endereco:cliente.getEnderecos()){
+            for (Endereco endereco : cliente.getEnderecos()) {
                 enderecoRepository.delete(endereco);
             }
 

@@ -1,7 +1,6 @@
 package com.rafaelbenz.sgsc.sgscapi.resources;
 
 import com.rafaelbenz.sgsc.sgscapi.dto.ClienteDTO;
-import com.rafaelbenz.sgsc.sgscapi.dto.ClienteNewDTO;
 import com.rafaelbenz.sgsc.sgscapi.model.Cliente;
 import com.rafaelbenz.sgsc.sgscapi.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,6 @@ public class ClienteResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody Cliente cliente, @PathVariable Integer id) {
-        System.out.println("está vindo pra ca --------------");
         cliente.setId(id);
         service.update(cliente);
         return ResponseEntity.noContent().build();

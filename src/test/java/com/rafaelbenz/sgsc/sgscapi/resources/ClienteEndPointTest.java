@@ -19,6 +19,12 @@ public class ClienteEndPointTest extends SgscApiApplicationTests {
 
 
     @Test
+    public void teste(){
+
+    }
+
+
+    @Test
     public void criarCliente() {
 
         ClienteNewDTO cliente = new ClienteNewDTO();

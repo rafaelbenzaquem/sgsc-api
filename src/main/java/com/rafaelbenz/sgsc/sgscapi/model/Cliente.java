@@ -75,7 +75,9 @@ public class Cliente implements Serializable {
         return tipo;
     }
 
-    public void setTipo(TipoCliente tipo) { this.tipo = (tipo == null) ? null : tipo.getCodigo();}
+    public void setTipo(TipoCliente tipo) {
+        this.tipo = (tipo == null) ? null : tipo.getCodigo();
+    }
 
     public List<Endereco> getEnderecos() {
         return enderecos;

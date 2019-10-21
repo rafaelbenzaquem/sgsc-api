@@ -23,9 +23,7 @@ public class ClienteResource {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody Cliente cliente) {
-        boolean teste = false;
-        if (teste)
-            throw new RuntimeException();
+
         Cliente Cliente = service.insert(cliente);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand(Cliente.getId()).toUri();

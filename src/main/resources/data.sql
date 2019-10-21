@@ -1,3 +1,6 @@
+insert into usuario(nome,login,senha,tipo)
+values('Administrador','admin','admin',2);
+
 insert into cliente(nome,email,cpf_ou_cnpj,tipo) values ('Maria Silva','maria@gmail.com','36378912377',0);
 insert into cliente(nome,email,cpf_ou_cnpj,tipo) values ('Rafael Benzaquem Neto','rafael@gmail.com','88754181364',0);
 

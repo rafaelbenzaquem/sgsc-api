@@ -31,6 +31,11 @@ public class ClienteService {
         cliente.setId(null);
         cliente = clienteRepository.save(cliente);
         enderecoRepository.saveAll(cliente.getEnderecos());
+
+       for (Endereco e : cliente.getEnderecos()) {
+            e.setCliente(cliente);
+        }
+
         return cliente;
     }
 
@@ -49,16 +54,19 @@ public class ClienteService {
     }
 
     public Cliente update(Cliente cliente) {
-        List<Endereco> enderecosNovos =new ArrayList<>();
-        for (Endereco endereco : cliente.getEnderecos()) {
-            endereco.setId(null);
-            endereco.setCliente(cliente);
-            enderecosNovos.add(endereco);
+        List<Endereco> enderecosNovos = cliente.getEnderecos();
+        List<Endereco> enderecos = find(cliente.getId()).getEnderecos();
+        clienteRepository.save(cliente);
+        for (Endereco endereco : enderecos) {
+            if (!enderecosNovos.contains(endereco)) {
+                enderecoRepository.delete(endereco);
+            }
         }
-         enderecoRepository.deleteAll(find(cliente.getId()).getEnderecos());
-         cliente = clienteRepository.save(cliente);
+        for (Endereco endereco : enderecosNovos) {
+            endereco.setCliente(cliente);
+            enderecoRepository.save(endereco);
+        }
 
-        enderecoRepository.saveAll(enderecosNovos);
         return cliente;
     }
 

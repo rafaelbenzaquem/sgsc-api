@@ -18,17 +18,23 @@ public class ServicoService {
     @Autowired
     ServicoRepository servicoRepository;
 
-    public Servico find(Integer id){
+    public Servico find(Integer id) {
         return servicoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Servico.class.getSimpleName()));
     }
 
     public Page<Servico> search(String nome, List<Categoria> categorias, Integer page, Integer linesPerPage, String direction, String... properties) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), properties);
-        return servicoRepository.findDistinctByNomeContainingAndCategoriasIn(nome,categorias,pageRequest);
+        if (categorias.isEmpty()) {
+            System.out.println("sem categoria");
+            return servicoRepository.findDistinctByNome(nome, pageRequest);
+        } else {
+            System.out.println("sem categoria");
+            return servicoRepository.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);
+        }
     }
 
-    public List<Servico> findAll(){
+    public List<Servico> findAll() {
         return servicoRepository.findAll();
     }
 

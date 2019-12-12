@@ -39,14 +39,14 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<UsuarioDTO> login(@Valid @RequestBody LoginDTO dto){
+    public ResponseEntity<UsuarioDTO> login(@Valid @RequestBody LoginDTO dto) {
         try {
             Usuario usuario = service.findByLoginAndSenha(dto.getLogin(), dto.getSenha());
             return ResponseEntity.ok().body(new UsuarioDTO(usuario));
-        }catch (ObjectNotFoundException ex){
+        } catch (ObjectNotFoundException ex) {
             ex.printStackTrace();
         }
-       return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
     }
 
     @RequestMapping(method = RequestMethod.GET)

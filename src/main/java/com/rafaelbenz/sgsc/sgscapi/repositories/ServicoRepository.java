@@ -20,4 +20,6 @@ public interface ServicoRepository extends JpaRepository<Servico, Integer> {
 
     public Page<Servico> findDistinctByNomeContainingAndCategoriasIn(String nome, List<Categoria> categorias, Pageable pageRequest);
 
+    public Page<Servico> findDistinctByNome(String nome, Pageable pageRequest);
+
 }

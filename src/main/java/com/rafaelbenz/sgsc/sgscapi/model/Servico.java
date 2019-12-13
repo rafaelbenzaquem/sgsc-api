@@ -27,6 +27,10 @@ public class Servico implements Serializable {
     public Servico() {
     }
 
+    public Servico(Integer id) {
+        this.id = id;
+    }
+
     public Servico(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;

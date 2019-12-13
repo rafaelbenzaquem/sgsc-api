@@ -14,23 +14,22 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/servicos")
 public class ServicoResource {
 
     @Autowired
-    ServicoService service;
+    ServicoService servicoService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Servico>> findAll() {
-        return ResponseEntity.ok().body(service.findAll());
+        return ResponseEntity.ok().body(servicoService.findAll());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Servico> find(@PathVariable Integer id) {
-        Servico servico = service.find(id);
+        Servico servico = servicoService.find(id);
         return ResponseEntity.ok().body(servico);
     }
 
@@ -49,7 +48,7 @@ public class ServicoResource {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Page<Servico> pages = service.search(nome, urlToCategorias(categorias), page, linesPerPage, direction, orderBy);
+        Page<Servico> pages = servicoService.search(nome, urlToCategorias(categorias), page, linesPerPage, direction, orderBy);
         Page<ServicoDTO> servicos = pages.map(p -> new ServicoDTO(p));
         return ResponseEntity.ok().body(servicos);
     }

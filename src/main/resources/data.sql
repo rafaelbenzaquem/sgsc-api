@@ -14,11 +14,13 @@ insert into categoria(nome) values ('marketing');
 insert into categoria(nome) values ('decoração');
 insert into categoria(nome) values ('estética');
 
+
 insert into servico_categoria(servico_id,categoria_id) values(1,3);
 insert into servico_categoria(servico_id,categoria_id) values(2,3);
 insert into servico_categoria(servico_id,categoria_id) values(3,4);
 insert into servico_categoria(servico_id,categoria_id) values(4,2);
 insert into servico_categoria(servico_id,categoria_id) values(5,1);
+insert into servico_categoria(servico_id,categoria_id) values(5,3);
 
 
 insert into cliente(nome,email,cpf_ou_cnpj,tipo) values ('Maria Silva','maria@gmail.com','36378912377',0);

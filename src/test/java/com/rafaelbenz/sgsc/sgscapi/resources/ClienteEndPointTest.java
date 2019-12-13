@@ -3,8 +3,12 @@ package com.rafaelbenz.sgsc.sgscapi.resources;
 import com.rafaelbenz.sgsc.sgscapi.SgscApiApplicationTests;
 import com.rafaelbenz.sgsc.sgscapi.dto.ClienteDTO;
 import com.rafaelbenz.sgsc.sgscapi.dto.ClienteNewDTO;
+import com.rafaelbenz.sgsc.sgscapi.model.Categoria;
+import com.rafaelbenz.sgsc.sgscapi.model.Servico;
+import com.rafaelbenz.sgsc.sgscapi.services.CategoriaService;
 import io.restassured.http.ContentType;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,11 +22,17 @@ import static org.junit.Assert.*;
 public class ClienteEndPointTest extends SgscApiApplicationTests {
 
 
+    @Autowired
+    CategoriaService categoriaService;
+
     @Test
-    public void teste(){
+    public void testRepositorio(){
+        List<Servico> servicos = new ArrayList<>();
+            servicos.add(new Servico(5));
 
+     List<Categoria> categorias =  categoriaService.findByServicos(servicos);
+        System.out.println(categorias);
     }
-
 
     @Test
     public void criarCliente() {

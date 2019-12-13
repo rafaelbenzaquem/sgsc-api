@@ -26,10 +26,10 @@ public class ServicoService {
     public Page<Servico> search(String nome, List<Categoria> categorias, Integer page, Integer linesPerPage, String direction, String... properties) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), properties);
         if (categorias.isEmpty()) {
-            System.out.println("sem categoria");
-            return servicoRepository.findDistinctByNome(nome, pageRequest);
+            System.out.println("Sem categoria");
+            return servicoRepository.findDistinctByNomeContaining(nome, pageRequest);
         } else {
-            System.out.println("sem categoria");
+            System.out.println("Com categoria");
             return servicoRepository.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);
         }
     }

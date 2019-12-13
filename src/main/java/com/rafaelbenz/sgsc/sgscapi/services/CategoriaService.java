@@ -1,6 +1,7 @@
 package com.rafaelbenz.sgsc.sgscapi.services;
 
 import com.rafaelbenz.sgsc.sgscapi.model.Categoria;
+import com.rafaelbenz.sgsc.sgscapi.model.Servico;
 import com.rafaelbenz.sgsc.sgscapi.repositories.CategoriaRepository;
 import com.rafaelbenz.sgsc.sgscapi.services.exceptions.DataIntegretyServiceException;
 import com.rafaelbenz.sgsc.sgscapi.services.exceptions.ObjectNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +28,10 @@ public class CategoriaService {
 
     public List<Categoria> findAll() {
         return repository.findAll();
+    }
+
+    public List<Categoria> findByServicos(List<Servico> servicos) {
+       return repository.findDistinctByServicosIn(servicos);
     }
 
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String direction, String... properties) {

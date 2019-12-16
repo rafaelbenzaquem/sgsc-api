@@ -2,14 +2,18 @@ package com.rafaelbenz.sgsc.sgscapi.resources;
 
 import com.rafaelbenz.sgsc.sgscapi.dto.ServicoDTO;
 import com.rafaelbenz.sgsc.sgscapi.model.Categoria;
+import com.rafaelbenz.sgsc.sgscapi.model.Cliente;
 import com.rafaelbenz.sgsc.sgscapi.model.Servico;
 import com.rafaelbenz.sgsc.sgscapi.services.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,16 +24,25 @@ import java.util.List;
 public class ServicoResource {
 
     @Autowired
-    ServicoService servicoService;
+    ServicoService service;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert(@Valid @RequestBody Servico servico) {
+
+        servico= service.insert(servico);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                .path("/{id}").buildAndExpand(servico.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Servico>> findAll() {
-        return ResponseEntity.ok().body(servicoService.findAll());
+        return ResponseEntity.ok().body(service.findAll());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Servico> find(@PathVariable Integer id) {
-        Servico servico = servicoService.find(id);
+        Servico servico = service.find(id);
         return ResponseEntity.ok().body(servico);
     }
 
@@ -48,7 +61,7 @@ public class ServicoResource {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Page<Servico> pages = servicoService.search(nome, urlToCategorias(categorias), page, linesPerPage, direction, orderBy);
+        Page<Servico> pages = service.search(nome, urlToCategorias(categorias), page, linesPerPage, direction, orderBy);
         Page<ServicoDTO> servicos = pages.map(p -> new ServicoDTO(p));
         return ResponseEntity.ok().body(servicos);
     }
@@ -61,4 +74,16 @@ public class ServicoResource {
 //        return Arrays.asList(urlResquestParameter.split(",")).stream().map(id -> new Categoria(Integer.parseInt(id),null)).collect(Collectors.toList());
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@Valid @RequestBody Servico servico, @PathVariable Integer id) {
+        servico.setId(id);
+        service.update(servico);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

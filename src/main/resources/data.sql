@@ -37,3 +37,16 @@ values('Avenida Otaviano de matos','105','sala 800','Centro','38777012','Santar√
 
 insert into endereco(logradouro,numero,complemento,bairro,cep,cidade,cliente_id)
 values('Rua Vinte e Quatro de Outubro','2284',null,'Aldeia','68040010','Santar√©m',2);
+
+
+insert into contrato(instante,cliente_id) values ('2019-09-30 10:58:00.000',1);
+insert into pagamento(contrato_id,estado)values (1,2);
+insert into pagamento_com_cartao(numero_parcelas,contrato_id)values (6,1);
+
+insert into contrato(instante,cliente_id) values ('2019-10-10 15:35:00.000',1);
+insert into pagamento(contrato_id,estado)values (2,1);
+insert into pagamento_com_boleto(data_vencimento,contrato_id)values ('2019-12-20',2);
+
+insert into item_contrato(desconto,preco,quantidade,servico_id,contrato_id) values (0.00   ,100.00 ,1, 1, 1);
+insert into item_contrato(desconto,preco,quantidade,servico_id,contrato_id) values (0.00   ,400.00   ,2, 3, 1);
+insert into item_contrato(desconto,preco,quantidade,servico_id,contrato_id) values (100.00 ,800.00  ,3, 2, 2);

@@ -45,13 +45,13 @@ public class Contrato implements Serializable {
     }
 
     //melhor deixar para o cliente da api calcular e poupar recursos do servidor
-    public BigDecimal getValorTotal() {
-        BigDecimal soma = new BigDecimal(0.0);
-        for (ItemContrato itemPedido : itens) {
-            soma = soma.add(itemPedido.getSubTotal());
-        }
-        return soma;
-    }
+//    public BigDecimal getValorTotal() {
+//        BigDecimal soma = new BigDecimal(0.0);
+//        for (ItemContrato itemPedido : itens) {
+//            soma = soma.add(itemPedido.getSubTotal());
+//        }
+//        return soma;
+//    }
 
     public Integer getId() {
         return id;

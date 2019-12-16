@@ -24,6 +24,10 @@ public class Servico implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.contrato")
+    private Set<ItemContrato> itens = new HashSet<>();
+
     public Servico() {
     }
 
@@ -35,6 +39,16 @@ public class Servico implements Serializable {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    @JsonIgnore
+    public List<Contrato> getPedidos(){
+        List<Contrato> contrato = new ArrayList<>();
+
+        for(ItemContrato item : itens )
+            contrato.add(item.getContrato());
+
+        return contrato;
     }
 
     public Integer getId() {
@@ -67,6 +81,10 @@ public class Servico implements Serializable {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Set<ItemContrato> getItens() {
+        return itens;
     }
 
     @Override

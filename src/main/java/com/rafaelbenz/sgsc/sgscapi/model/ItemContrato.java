@@ -33,9 +33,9 @@ public class ItemContrato implements Serializable {
     }
 
 //    //melhor deixar para o cliente da api calcular e poupar recursos do servidor
-    public BigDecimal getSubTotal(){
-       return (new BigDecimal(preco).subtract(new BigDecimal(desconto))).multiply(new BigDecimal(quantidade));
-    }
+//    public BigDecimal getSubTotal(){
+//       return (new BigDecimal(preco).subtract(new BigDecimal(desconto))).multiply(new BigDecimal(quantidade));
+//    }
 
     @JsonIgnore
     public Contrato getContrato() {

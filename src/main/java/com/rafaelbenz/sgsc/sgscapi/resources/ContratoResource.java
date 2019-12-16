@@ -19,10 +19,10 @@ public class ContratoResource {
     ContratoService service;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody Contrato pedido){
-        pedido = service.insert(pedido);
+    public ResponseEntity<Void> insert(@Valid @RequestBody Contrato contrato){
+        contrato = service.insert(contrato);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                .path("/{id}").buildAndExpand(pedido.getId()).toUri();
+                .path("/{id}").buildAndExpand(contrato.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

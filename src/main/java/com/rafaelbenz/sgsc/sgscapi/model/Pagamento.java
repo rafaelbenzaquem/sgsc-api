@@ -41,12 +41,12 @@ public class Pagamento implements Serializable {
         this.id = id;
     }
 
-    public EstadoPagamento getEstado() {
-        return EstadoPagamento.toEnum(estado);
+    public Integer getEstado() {
+        return estado;
     }
 
     public void setEstado(EstadoPagamento estado) {
-        this.estado = estado.getCodigo();
+        this.estado = (estado == null) ? null : estado.getCodigo();
     }
 
     public Contrato getContrato() {
